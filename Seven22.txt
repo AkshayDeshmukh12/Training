@@ -1,0 +1,157 @@
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+
+namespace Test1
+{
+    public class tab
+    {
+        public void Any()
+        {
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query2 = "insert into Orderr values(104,202,getdate(),740)";
+
+            SqlCommand cmd = new SqlCommand(query2, connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
+
+        }
+        public void Two()
+        {
+            SqlConnection connection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String Query3 = "insert into Payment values('online')";
+            SqlCommand cmd2 = new SqlCommand(Query3, connection1);
+            connection1.Open();
+            cmd2.ExecuteNonQuery();
+            connection1.Close();
+        }
+        public void Three()
+        {
+            SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query4 = "insert into Restaurant values('Derapunjab','Sambhajinagar')";
+
+            SqlCommand cmd3 = new SqlCommand(query4, connection2);
+            connection2.Open();
+            cmd3.ExecuteNonQuery();
+            connection2.Close();
+
+
+        }
+        public void four()
+        {
+            SqlConnection connection3 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String Query5 = "insert into Restrofood values('Vegthali')";
+            SqlCommand cmd4 = new SqlCommand(Query5,connection3);
+            connection3.Open();
+            cmd4.ExecuteNonQuery();
+            connection3.Close();
+
+        }
+    }
+    public class lap
+    {
+        public void fifth()
+        {
+            SqlConnection connection5 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrive = "select top 2 firstName from Customer";
+
+            SqlCommand cmd5 = new SqlCommand(retrive,connection5);
+            connection5.Open();
+           string fname=Convert.ToString(cmd5.ExecuteScalar());
+            Console.WriteLine(fname);
+            connection5.Close();
+
+        }
+        public void six()
+        {
+            SqlConnection connection6 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrive1 = "select Top 2 customerrId from Orderr";
+            SqlCommand cmd6 = new SqlCommand(retrive1,connection6);
+            connection6.Open();
+            cmd6.ExecuteScalar();
+            connection6.Close();
+        }
+        public void seven()
+        {
+
+            SqlConnection connection7 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrivequery = "Select top 3 paymenttype from Payment";
+            SqlCommand cmd7 = new SqlCommand(retrivequery,connection7);
+            connection7.Open();
+           String paymenttype = Convert.ToString(cmd7.ExecuteScalar());
+            Console.WriteLine(paymenttype);   
+            connection7.Close();
+
+        }
+    }
+    internal class Program
+    {
+
+        static void Main(string[] args)
+        { 
+            //insertion of all table
+            tab t=new tab();
+            t.Any();
+            t.Two();
+            t.Three();
+            t.four();
+
+            //retrive data for all table
+            lap l=new lap();
+            l.fifth();
+            l.six();
+            l.seven();
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "insert into Customer values('Amit','Pande','Shgdt@gmailcom',42562331)";
+
+
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
+
+        
+        public void Customer()
+        {
+
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query1 = "Customer";
+
+            SqlCommand cmd1 = new SqlCommand(query1, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd1.Parameters.Add("@firstName", System.Data.SqlDbType.VarChar).Value = "Ashok";
+            cmd1.Parameters.Add("@lastname", System.Data.SqlDbType.VarChar).Value = "More";
+            cmd1.Parameters.Add("@Email", System.Data.SqlDbType.VarChar).Value = "asghf@gmail.com";
+            cmd1.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = "4521826";
+            conn1.Open();
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+    }
+}
+
+
+

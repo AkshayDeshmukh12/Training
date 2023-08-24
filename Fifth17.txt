@@ -1,0 +1,34 @@
+
+select * from Employee
+
+insert into Employee values(6,'Vinod')
+insert into Employee values(7,'Akki')
+
+create trigger trinsert on  Employee
+after insert
+as
+begin 
+select * from inserted
+end
+
+delete from Employee where id=6
+create trigger deldelete on Employee
+after delete
+as
+begin
+select * from deleted
+end
+
+
+update Employee set Name='Sunil' where id=6
+create trigger trupdate on Employee
+after update
+as
+begin
+select * from inserted
+select * from deleted
+end
+
+
+
+

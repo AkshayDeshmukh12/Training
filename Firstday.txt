@@ -1,0 +1,22 @@
+	create database Companydb
+create table Company(id int identity(1,1),name varchar(20),surname varchar(30),sallary int,marks float(40))
+INSERT INTO Company values('Akshay','Deshmukh',12,30.00,'2023-08-08',412)
+INSERT INTO Company values('Rani','mukharji',28,40.00,'2023-08-08',126)
+INSERT INTO Company values('Karishma','kappor',28,60.00,'2023-08-08',025)
+INSERT INTO Company values('dharti','nimoda',28,50.00,'2023-08-08',453)
+INSERT INTO Company values('bala','subramanyam',28,10.00,'2023-08-08',231)
+
+alter table Company add bdate date
+alter table Company add phone_no int
+INSERT INTO Company values('bala','subramanyam',28,10.00,'2023-08-08',231)
+
+INSERT INTO Company values('bala','subramanyam',28,10.00,'2023-08-08',756)
+update Company Set marks=90 where id=5;
+update Company Set sallary=80 where id=3;
+
+Delete from Company where name='Rani'
+select * from Company where name like'd%'
+select * from Company
+select GETDATE();
+select top 2* from facebook_details4 order by device_type desc
+

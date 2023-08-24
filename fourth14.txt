@@ -1,0 +1,194 @@
+create database Zomatodb
+
+use Zomatodb
+
+create table Customer(Id int identity(101,1),firstName varchar(20),lastName varchar(20),Email varchar(100),phone varchar(30))
+insert into Customer values('Amol','Deshmukh','adesh@123gmail.com',7458961235)
+insert into Customer values('Amit','Gupta','adhdb@123gmail.com',7458961245)
+insert into Customer values('Ashish','Deshpane','arinv@123gmail.com',7458961255)
+insert into Customer values('Dipak','Joshi','ajhnb@123gmail.com',7458961265)
+insert into Customer values('Subham','Narwade','aoopkkm@123gmail.com',7458961275)
+--drop table Customer
+select * from Customer
+
+create table Restaurant(Id int identity(201,1),Resname varchar(20), Address varchar(20))
+Insert into Restaurant values('Amnora','Navranagpura')
+Insert into Restaurant values('Co2','Memnagar')
+Insert into Restaurant values('Seasons','ScienceCity')
+Insert into Restaurant values('Bird Welly','SubhaahChowk')
+Insert into Restaurant values('Ginger','Sola')
+
+--drop table Restaurant
+select * from Restaurant
+
+create table Orderr(Id int identity(301,1),CustomerDetails varchar(20),RestaurantDetails varchar(30),createdon datetime default getdate(),amount DECIMAL(10,2) NOT NULL,)
+insert into Orderr values(101,201,getdate(),400)
+insert into Orderr values(101,202,getdate(),390)
+insert into Orderr values(102,201,getdate(),400)
+insert into Orderr values(103,204,getdate(),450)
+insert into Orderr values(101,205,getdate(),500)
+
+--drop table Orderr
+select * from Orderr
+
+select Orderr.*,Customer.firstName,lastName,Restaurant.Resname from Orderr inner join Customer on Orderr.CustomerDetails=Customer.Id inner join Restaurant on Orderr.RestaurantDetails=Restaurant.Id
+ 
+--select Orderr.*,Restaurant.Resname from Orderr inner join Restaurant on Orderr.RestaurantDetails=Restaurant.Id
+
+EXEC Customer1 107,'BCD','EFG','42324',3411,'s'
+EXEC Restaurant1 0,'South','Kalapur','s'
+EXEC Orderr1 308,104,203,340,'s'
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: Akshay
+-- Create date: 2023-08-14 3:46
+-- Description: To create demo Normalization form
+-- =============================================
+Create PROCEDURE Customer1
+-- Add the parameters for the stored procedure here
+@userDetailId int,
+@firstName varchar(10),
+@lastName varchar(20),
+@mobileNo varchar(10),
+@email varchar(40),
+@OPType varchar(5)
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+SET NOCOUNT ON;
+
+-- Insert statements for procedure here
+If(@OPType='insert'or @OPType='INSERT'or @OPType='i'or @OPType='I'and @userDetailId=0)
+BEGIN
+Insert into Customer values(@firstName,@lastNAme,@email,@mobileNo)
+END
+
+else
+BEGIN
+if(@OPType='update'or @OPType='UPDATE'or @OPType='u'or @OPType='U')
+BEGIN
+update Customer set firstName=@firstName where Id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='delete'or @OPType='DELETE'or @OPType='d'or @OPType='D'and @firstName=NULL)
+BEGIN
+delete from Customer where id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='select'or @OPType='SELECT'or @OPType='s'or @OPType='S'and @firstName=NULL and @userDetailId=Null)
+
+select * from Customer
+END
+END
+END
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: Akshay
+-- Create date: 2023-08-14 4:48
+-- Description: To create demo Normalization form
+-- =============================================
+Create PROCEDURE Restaurant1
+-- Add the parameters for the stored procedure here
+@userDetailId int,
+@Resname varchar(20),
+@Address varchar(20),
+@OPType varchar(5)
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+SET NOCOUNT ON;
+
+-- Insert statements for procedure here
+If(@OPType='insert'or @OPType='INSERT'or @OPType='i'or @OPType='I'and @userDetailId=0)
+BEGIN
+Insert into Restaurant values(@Resname,@Address)
+END
+
+else
+BEGIN
+if(@OPType='update'or @OPType='UPDATE'or @OPType='u'or @OPType='U')
+BEGIN
+update Restaurant set Resname=@Resname,Address=@Address where Id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='delete'or @OPType='DELETE'or @OPType='d'or @OPType='D'and @Resname=NULL)
+BEGIN
+delete from Restaurant where id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='select'or @OPType='SELECT'or @OPType='s'or @OPType='S'and @Resname=NULL and @userDetailId=Null)
+
+select * from Restaurant
+END
+END
+END
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: Akshay
+-- Create date: 2023-08-14 5:10
+-- Description: To create demo Normalization form
+-- =============================================
+Create PROCEDURE Orderr1
+-- Add the parameters for the stored procedure here
+@userDetailId int,
+@CustomerDetails varchar(20),
+@RestaurantDetails varchar(30),
+@amount DECIMAL(10,2),
+@OPType varchar(5)
+AS
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from
+-- interfering with SELECT statements.
+SET NOCOUNT ON;
+
+-- Insert statements for procedure here
+If(@OPType='insert'or @OPType='INSERT'or @OPType='i'or @OPType='I'and @userDetailId=0)
+BEGIN
+Insert into Orderr values(@CustomerDetails,@RestaurantDetails,getdate(),@amount)
+END
+
+else
+BEGIN
+if(@OPType='update'or @OPType='UPDATE'or @OPType='u'or @OPType='U')
+BEGIN
+update Orderr set CustomerDetails=@CustomerDetails,RestaurantDetails=@RestaurantDetails,amount=@amount where Id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='delete'or @OPType='DELETE'or @OPType='d'or @OPType='D'and @CustomerDetails=NULL)
+BEGIN
+delete from Orderr where id=@userDetailId
+END
+else
+BEGIN
+if(@OPType='select'or @OPType='SELECT'or @OPType='s'or @OPType='S'and @CustomerDetails=NULL and @userDetailId=Null)
+
+select * from Orderr
+END
+END
+END
+END
+GO
+   

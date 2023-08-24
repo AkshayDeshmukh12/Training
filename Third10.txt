@@ -1,0 +1,128 @@
+create database userdb
+use userdb
+
+create table userr(id int identity(101,1),name varchar(20))
+insert into userr values('A1')
+insert into userr values('A2')
+insert into userr values('A3')
+
+select * from userr
+
+create table Lookuptype(id int identity(201,1),Lookuptype varchar(20))
+insert into Lookuptype values ('hit_type')
+insert into Lookuptype values('device_type')
+insert into Lookuptype values('connection_type') 
+
+--drop table Lookuptype
+--insert into Lookuptype 
+--select id,lookupvalues,lk_id from lookupvalues
+select * from Lookuptype
+
+
+create table lookupvalues(id int identity(301,1),lookupvalues varchar(10),lk_id int)
+insert into lookupvalues values('like',201)
+insert into lookupvalues values('share',201)
+insert into lookupvalues values('comment',201)
+insert into lookupvalues values('mobile',202)
+insert into lookupvalues values('laptop',202)
+insert into lookupvalues values('wi-fi',203)
+insert into lookupvalues values('tablet',202)
+--insert into lookupvalues values('like','mobile','wi-fi')
+--insert into lookupvalues values('share','laptop','lan')
+--insert into lookupvalues values('comment','tablet','volte')
+--drop table lookupvalues
+select * from lookupvalues
+
+select lookupvalues.* ,Lookuptype.Lookuptype from lookupvalues inner join Lookuptype on lookupvalues.lk_id=Lookuptype.id
+
+create table Userdevicemapping(id int identity(401,1),u_id int,look_id int)
+insert into Userdevicemapping values(101,304)
+insert into lookupvalues values(102,304)
+insert into lookupvalues values(103,304)
+insert into lookupvalues values(101,305)
+insert into lookupvalues values(102,305)
+insert into lookupvalues values(103,305)
+insert into lookupvalues values(101,307)
+insert into lookupvalues values(102,307)
+insert into lookupvalues values(103,307)
+--drop table Userdevicemapping
+select * from Userdevicemapping
+
+create table history(id int identity(501,1),m_id int,look_id int)
+insert into history values(401,301)
+insert into lookupvalues values(402,301)
+
+--drop table history
+select * from history
+select history.*,Userdevicemapping.look_id from history inner join Userdevicemapping on Userdevicemapping.id=history.m_id
+
+
+
+
+
+--------------------eg2----------------------------
+
+
+
+create database Exampledb
+
+use Exampledb
+
+create table Userr(id int identity(101,1),name varchar(10))
+insert into Userr values('A1')
+insert into Userr values('A2')
+insert into Userr values('A3')
+select * from Userr
+
+create table Lookuptype(id int identity(201,1),lookuptype varchar(20))
+insert into Lookuptype values('hit_type')
+insert into Lookuptype values('device_type')
+insert into Lookuptype values('Connection_type')
+insert into Lookuptype values ('Authentication_type')
+
+--drop table Lookuptype
+select * from Lookuptype
+
+create table lookupvalues(id int identity(301,1),lookupvalues varchar(20),lk_id int)
+insert into lookupvalues values ('like',201)
+insert into lookupvalues values ('share',201)
+insert into lookupvalues values ('comment',201)
+insert into lookupvalues values ('Laptop',202)
+insert into lookupvalues values ('pc',202)
+insert into lookupvalues values ('wi_fi',203)
+insert into lookupvalues values ('Lan',203)
+insert into lookupvalues values ('volte',203)
+insert into lookupvalues values ('tablet',202)
+insert into lookupvalues values ('Facebook',204)
+insert into lookupvalues values ('Google',204)
+insert into lookupvalues values ('Instagram',204)
+
+--drop table lookupvalues
+select * from lookupvalues
+
+select lookupvalues.*,lookuptype.lookuptype from lookupvalues inner join Lookuptype on lookupvalues.lk_id=lookuptype.id
+
+create table devicemapping(id int identity(401,1),u_id int,look_id int)
+insert into devicemapping values(101,301)
+insert into devicemapping values (102,301)
+insert into devicemapping values (103,301)
+insert into devicemapping values (101,304)
+insert into devicemapping values (102,307)
+
+select * from devicemapping
+
+create table history(id int identity(501,1),u_id int,m_id int,look_id int)
+insert into history values (101,401,301)
+insert into history values (102,402,302)
+insert into history values (103,402,301)
+insert into history values (101,404,307)
+insert into history values (103,405,304)
+
+select * from history
+
+select history.*,devicemapping.look_id from history inner join devicemapping on history.m_id=devicemapping.id
+select history.*,Userr.name from history inner join Userr on history.u_id=Userr.id
+
+
+
+

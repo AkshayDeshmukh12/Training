@@ -1,0 +1,101 @@
+create database prctisedb
+
+use prctisedb
+
+create table Customer(id int identity(101,1),fname varchar(20),lname varchar(30),cont_no bigint,payment int)
+insert into Customer values('lK','Deshpande',563214,740)
+
+select * from Customer
+
+
+alter table Orrder(id int identity(201,1),cid int)
+insert into Orrder values(202,102)
+
+create table TotalAmmount(id int identity(301,1),Ammount int,Offer int)
+insert into TotalAmmount values(400,20)
+
+select * from TotalAmmount
+truncate table TotalAmmount
+select * from Orrder
+drop trigger tr1 on Customer
+after insert
+as
+begin
+declare @id as int
+declare @ammount as int
+
+update Orrder set ammount=ammount-30
+end
+
+alter trigger tr2 on Customer
+after insert
+as
+begin
+declare @id as int
+declare @Ammount as int
+declare @Offer as int
+
+update TotalAmmount set Ammount=Ammount-(Ammount*20/100) where id=305
+end
+
+
+
+create database Akdb
+
+use Akdb
+
+
+
+create table Customer(Cid int identity(101,1),fname varchar(30),lname varchar(30),Email varchar(30),contno bigint,Payment int)
+insert into Customer values('gk','desh','agshh@gmail.com',123645,1000)
+
+create table Restaurant(Rid int identity(201,1),Rname varchar(30),Address varchar(40))
+insert into Restaurant values('Keya','Aurangabad')
+
+create table Orrder(Oid int identity(301,1),Cid int ,Rid int,Creaton Datetime Default getdate())
+insert into Orrder values(102,204,getdate())
+
+create table TotalAmmount(id int identity(401,1),Ammount int,Offer int)
+insert into TotalAmmount values(800,20)
+
+select * from Customer
+select * from Restaurant
+select * from Orrder
+select * from TotalAmmount
+
+select * from Orrder inner join Customer on Orrder.Cid=Customer.Cid
+inner join Restaurant on Restaurant.Rid=Orrder.Rid
+
+
+--truncate table TotalAmmount
+
+alter trigger tr1 on Customer
+after insert
+as
+begin
+declare @id as int
+declare @Ammount as int
+declare @Offer as int
+
+update TotalAmmount set Ammount=Ammount-(Ammount*20/100) 
+end
+
+
+
+alter trigger tr2 on Customer
+after insert
+as
+begin
+declare @id as int
+declare @fname as varchar
+declare @lname as varchar
+declare @Email as varchar
+declare @contno as bigint
+declare @Payment as int
+
+update Customer set Payment=Payment-40
+end
+
+
+
+

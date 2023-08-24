@@ -1,0 +1,89 @@
+create database Bankdb
+use Bankdb
+create table bank(Id int identity(1001,1),name varchar(20),Acc_no bigint,mob_no bigint,ammount bigint)
+insert into bank values('Ak',12454523619,4152789632,4569)
+insert into bank values('Bk',12454523618,4152789631,456)
+insert into bank values('Ck',12454523617,4152789630,4565)
+insert into bank values('Dk',12454523616,4152789639,4561)
+insert into bank values('Ek',12454523615,4152789638,4564)
+insert into bank values('Fk',12454523614,4152789637,4563)
+
+select * from bank
+alter table bank drop column  Acc_no
+
+create table bank_details(bnk_id int identity(1001,1),ID int,Acc_type varchar(20),Acc_no bigint,name varchar(20),createdon datetime default getdate())
+insert into bank_details
+select id, 'Saving',4569,'Rushi',getdate() from bank
+select * from bank_details
+
+--alter table bank_details add bnk_id int identity(1,1)
+--alter table bank_details add bnk_id int identity(1001,1)
+
+
+select bnd.*,bk.[name] from bank_details bnd inner join bank bk on bk.Id=bnd.bnk_id
+
+drop table bank_details
+
+
+
+
+
+
+
+-------eg.2
+
+
+
+create database Faceboookdb
+
+use Facebookdb
+
+create table facebook(id int identity(1001,1),
+name varchar(10),hit_by varchar(10),
+device_con varchar(10))
+
+insert into facebook values('sk','abc','wi-fi')
+insert into facebook values('dk','bcd','lan')
+insert into facebook values('fk','cde','volte')
+insert into facebook values('gk','def','wi-fi')
+insert into facebook values('hk','efg','lan')
+insert into facebook values('jk','fgh','volte')
+insert into facebook values('kk','ghj','wi-fi')
+insert into facebook values('lk','hjk','volte')
+select * from facebook
+
+
+create table facebook_details4(fid int,fd_id int identity(111,1),hit_type varchar(20),device_type varchar(10),createdon datetime default getdate())
+insert into facebook_details2 values('like','mobile',getdate())
+insert into facebook_details2 values('share','pc',getdate())
+insert into facebook_details2 values('comment','laptop',getdate())
+insert into facebook_details2 values('share','pc',getdate())
+insert into facebook_details2 values('like','laptop',getdate())
+insert into facebook_details2 values('comment','mobile',getdate())
+drop table facebook_details
+select * from facebook_details4
+
+insert into facebook_details4
+select id,'like','laptop',GETDATE() from facebook
+
+select facebook_details4.*,facebook.hit_by from facebook_details4 inner join facebook on facebook_details4.fid=facebook.id
+
+update facebook_details4 Set hit_type='comment',device_type='mobile' where fd_id=112
+update facebook_details4 Set hit_type='like',device_type='pc' where fd_id=113
+update facebook_details4 Set hit_type='share',device_type='laptop' where fd_id=114
+update facebook_details4 Set hit_type='comment',device_type='android' where fd_id=115
+update facebook_details4 Set hit_type='like',device_type='laptop' where fd_id=116
+update facebook_details4 Set hit_type='comment',device_type='mobile' where fd_id=117
+
+SELECT COUNT(*) AS total_hits_by_laptop FROM facebook_details4 WHERE device_type = 'laptop';
+
+SELECT hit_type, COUNT(*) as total_count
+FROM facebook_details4
+GROUP BY hit_type
+HAVING COUNT(*) > 1
+ORDER BY total_count DESC;
+
+select COUNT(device_type)from facebook_details4
+select COUNT(distinct device_type)from facebook_details4
+select COUNT(distinct device_con)from facebook
+
