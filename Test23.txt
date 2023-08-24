@@ -1,0 +1,540 @@
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+
+namespace Test1
+{
+    public class tab
+    {
+        public void Any()
+        {
+
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query2 = "insert into Orderr values(104,202,getdate(),740)";
+
+            SqlCommand cmd = new SqlCommand(query2, connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
+
+        }
+        public void Any2()
+        {
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "update Orderr set amount=1200 where id=377";
+
+            SqlCommand cmd = new SqlCommand(query,connection);
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
+        }
+        public void Any3()
+        {
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "Delete from Orderr where id=380";
+
+            SqlCommand sqlCommand = new SqlCommand(query,connection);
+            connection.Open();
+            sqlCommand.ExecuteNonQuery();
+            connection.Close();
+
+
+        }
+        public void Two()
+        {
+            SqlConnection connection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String Query3 = "insert into Payment values('online')";
+            SqlCommand cmd2 = new SqlCommand(Query3, connection1);
+            connection1.Open();
+            cmd2.ExecuteNonQuery();
+            connection1.Close();
+        }
+        public void Two1() 
+        {
+            SqlConnection connection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "Update Payment set paymenttype='Offline' where pid=421";
+
+            SqlCommand cmd = new SqlCommand(queryu, connection1);
+            connection1.Open();
+            cmd.ExecuteNonQuery();
+            connection1.Close();
+
+
+        }
+        public void Two2()
+        {
+            SqlConnection connection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Delete from Payment where pid=407";
+
+            SqlCommand command = new SqlCommand(queryd, connection1);
+            connection1.Open();
+            command.ExecuteNonQuery();
+            connection1.Close();
+
+        }
+        public void Three()
+        {
+            SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query4 = "insert into Restaurant values('Derapunjab','Sambhajinagar')";
+
+            SqlCommand cmd3 = new SqlCommand(query4, connection2);
+            connection2.Open();
+            cmd3.ExecuteNonQuery();
+            connection2.Close();
+
+
+        }
+        public void Three1()
+        {
+            SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "update Restaurant set Name='Yashwanti' where id=209";
+            SqlCommand command = new SqlCommand(queryu, connection2);
+            connection2.Open();
+            command.ExecuteNonQuery();
+            connection2.Close();
+
+        }
+        public void Three2()
+        {
+            SqlConnection connection2 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "delete from Restaurant where id=226";
+
+            SqlCommand command = new SqlCommand(queryd, connection2);
+            connection2.Open();
+            command.ExecuteNonQuery();
+            connection2.Close();
+
+        }
+        public void four()
+        {
+            SqlConnection connection3 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String Query5 = "insert into Restrofood values('Vegthali')";
+            SqlCommand cmd4 = new SqlCommand(Query5, connection3);
+            connection3.Open();
+            cmd4.ExecuteNonQuery();
+            connection3.Close();
+
+        }
+        public void four1() 
+        {
+            SqlConnection connection3 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "update Restrofood set foodtype='Southindian' where rfid=510";
+            SqlCommand cmd = new SqlCommand(queryu, connection3);
+            connection3.Open();
+            cmd.ExecuteNonQuery();
+            connection3.Close();
+        }
+        public void four2()
+        {
+            SqlConnection connection3 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Delete from Restrofood where rfid=508";
+            SqlCommand cmd = new SqlCommand(queryd, connection3);
+            connection3.Open();
+            cmd.ExecuteNonQuery();
+            connection3.Close();
+        }
+    }
+    public class lap
+    {
+        public void fifth()
+        {
+            SqlConnection connection5 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrive = "select top 2 firstName from Customer";
+
+            SqlCommand cmd5 = new SqlCommand(retrive, connection5);
+            connection5.Open();
+            string fname = Convert.ToString(cmd5.ExecuteScalar());
+            Console.WriteLine(fname);
+            connection5.Close();
+
+        }
+        public void six()
+        {
+            SqlConnection connection6 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrive1 = "select Top 2 customerrId from Orderr";
+            SqlCommand cmd6 = new SqlCommand(retrive1, connection6);
+            connection6.Open();
+            cmd6.ExecuteScalar();
+            connection6.Close();
+        }
+        public void seven()
+        {
+
+            SqlConnection connection7 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String retrivequery = "Select top 3 paymenttype from Payment";
+            SqlCommand cmd7 = new SqlCommand(retrivequery, connection7);
+            connection7.Open();
+            String paymenttype = Convert.ToString(cmd7.ExecuteScalar());
+            Console.WriteLine(paymenttype);
+            connection7.Close();
+
+        }
+    }
+    internal class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Program program = new Program();
+            program.Customer();
+            
+            program.Customer1();
+            program.Customer2();
+            program.Orderr();
+            program.Orderr1();
+            program.Orderr2();
+            program.Payment();
+            program.Payment1();
+            program.Payment2();
+            program.Restaurant();
+            program.Restaurant1();
+            program.Restaurant2();
+            program.Restrofood();
+            program.Restrofood1();
+            program.Restrofood2();
+            //insertion of all table
+            tab t = new tab();
+            t.Any();
+            t.Any2();
+            t.Any3();
+            t.Two();
+            t.Two1();
+            t.Two2();
+            t.Three();
+            t.Three1();
+            t.Three2();
+            t.four();
+            t.four1();
+            t.four2();
+
+
+            //retrive data for all table
+            lap l = new lap();
+            l.fifth();
+            l.six();
+            l.seven();
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "insert into Customer values('Amit','Pande','Shgdt@gmailcom',42562331)";
+
+
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
+
+        public void Customer()
+        {
+
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query1 = "Customer3";
+            conn1.Open();
+            SqlCommand cmd1 = new SqlCommand(query1, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd1.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 0;
+            cmd1.Parameters.Add("@firstName", System.Data.SqlDbType.VarChar).Value = "Ashok";
+            cmd1.Parameters.Add("@lastname", System.Data.SqlDbType.VarChar).Value = "More";
+            cmd1.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = "asghf@gmail.com";
+            cmd1.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = "4521826";
+            cmd1.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "i";
+
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+        public void Customer1() 
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "Customer3";
+            conn1.Open();
+            SqlCommand cmd = new SqlCommand(queryu, conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 137;
+            cmd.Parameters.Add("@firstName", System.Data.SqlDbType.VarChar).Value = "Vinod";
+            cmd.Parameters.Add("@lastname", System.Data.SqlDbType.VarChar).Value = "Khanna";
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = "attryf@gmail.com";
+            cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = "4548926";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "U";
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+        public void Customer2()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Customer3";
+            SqlCommand cmd = new SqlCommand(queryd, conn1);
+            conn1.Open() ;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 151;
+            cmd.Parameters.Add("@firstName", System.Data.SqlDbType.VarChar).Value = "Vinod";
+            cmd.Parameters.Add("@lastname", System.Data.SqlDbType.VarChar).Value = "Khanna";
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = "attryf@gmail.com";
+            cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = "4548926";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "D";
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+
+        public void Orderr()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+
+            String query = "Orderr1";
+            SqlCommand cmd1 = new SqlCommand(query, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd1.Parameters.Add("@CustomerId",System.Data.SqlDbType.Int).Value=0;
+            cmd1.Parameters.Add("@CustomerrId", System.Data.SqlDbType.VarChar).Value = "102";
+            cmd1.Parameters.Add("@RestaurantId", System.Data.SqlDbType.VarChar).Value = "201";
+            cmd1.Parameters.Add("@amount", System.Data.SqlDbType.VarChar).Value = "840";
+            cmd1.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "i";
+
+            conn1.Open();
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+        }
+        public void Orderr1() 
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "Orderr1";
+
+            SqlCommand cmd1 = new SqlCommand(queryu, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd1.Parameters.Add("@CustomerId", System.Data.SqlDbType.Int).Value = 343;
+            cmd1.Parameters.Add("@CustomerrId", System.Data.SqlDbType.VarChar).Value = "107";
+            cmd1.Parameters.Add("@RestaurantId", System.Data.SqlDbType.VarChar).Value = "203";
+            cmd1.Parameters.Add("@amount", System.Data.SqlDbType.VarChar).Value = "9940";
+            cmd1.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "u";
+
+            conn1.Open();
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+        public void Orderr2()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Orderr1";
+            SqlCommand cmd = new SqlCommand(queryd, conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@CustomerId", System.Data.SqlDbType.Int).Value = 392;
+            cmd.Parameters.Add("@CustomerrId", System.Data.SqlDbType.VarChar).Value = "107";
+            cmd.Parameters.Add("@RestaurantId", System.Data.SqlDbType.VarChar).Value = "203";
+            cmd.Parameters.Add("@amount", System.Data.SqlDbType.VarChar).Value = "9940";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "D";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+
+        public void Payment()
+                {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "payment1";
+            SqlCommand cmd2 = new SqlCommand(query, conn1);
+            cmd2.CommandType=System.Data.CommandType.StoredProcedure;
+            //cmd2.Parameters.Add("@paymentDetailId", System.Data.SqlDbType.Int).Value=0;
+            cmd2.Parameters.Add("@pid",System.Data.SqlDbType.Int).Value = 0;
+            cmd2.Parameters.Add("@paymenttype", System.Data.SqlDbType.VarChar).Value = "Cash";
+            cmd2.Parameters.Add("@OPType",System.Data.SqlDbType.VarChar).Value="i";
+            conn1.Open();
+            cmd2.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+        public void Payment1()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+
+            String queryu = "payment1";
+
+            SqlCommand cmd1 = new SqlCommand(queryu, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd2.Parameters.Add("@paymentDetailId", System.Data.SqlDbType.Int).Value=0;
+            cmd1.Parameters.Add("@pid", System.Data.SqlDbType.Int).Value = 424;
+            cmd1.Parameters.Add("@paymenttype", System.Data.SqlDbType.VarChar).Value = "Offline";
+            cmd1.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "u";
+            conn1.Open();
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+        public void Payment2()
+        {
+
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "payment1";
+
+            SqlCommand cmd1 = new SqlCommand(queryd, conn1);
+            cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd2.Parameters.Add("@paymentDetailId", System.Data.SqlDbType.Int).Value=0;
+            cmd1.Parameters.Add("@pid", System.Data.SqlDbType.Int).Value = 529;
+            cmd1.Parameters.Add("@paymenttype", System.Data.SqlDbType.VarChar).Value = "Offline";
+            cmd1.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "d";
+            conn1.Open();
+            cmd1.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+        public void Restaurant()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String query = "Restaurant2";
+            SqlCommand cmd = new SqlCommand(query,conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@CustomerId",System.Data.SqlDbType.Int).Value=0;
+            cmd.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = "Kailash";
+            cmd.Parameters.Add("@Address", System.Data.SqlDbType.VarChar).Value = "Jalana";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "i";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+        public void Restaurant1() 
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "Restaurant2";
+            SqlCommand cmd = new SqlCommand(queryu, conn1);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@CustomerId", System.Data.SqlDbType.Int).Value = 222;
+            cmd.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = "Kailash";
+            cmd.Parameters.Add("@Address", System.Data.SqlDbType.VarChar).Value = "Jalana";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "u";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+        public void Restaurant2()
+        {
+
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Restaurant2";
+            SqlCommand cmd = new SqlCommand(queryd, conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@CustomerId", System.Data.SqlDbType.Int).Value = 225;
+            cmd.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = "Kailash";
+            cmd.Parameters.Add("@Address", System.Data.SqlDbType.VarChar).Value = "Jalana";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "D";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+
+
+        }
+        public void Restrofood()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryrefood = "Restaurantfood";
+
+            SqlCommand cmd = new SqlCommand(queryrefood,conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            //cmd.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@rfid", System.Data.SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@foodtype", System.Data.SqlDbType.VarChar).Value = "Non-vegthali";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "i";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+        }
+        public void Restrofood1()
+        {
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryu = "Restaurantfood";
+
+            SqlCommand cmd = new SqlCommand(queryu, conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            //cmd.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@rfid", System.Data.SqlDbType.Int).Value = 510;
+            cmd.Parameters.Add("@foodtype", System.Data.SqlDbType.VarChar).Value = "Non-vegthali";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "u";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+        }
+        public void Restrofood2()
+        {
+
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+
+            String queryd = "Restaurantfood";
+            SqlCommand cmd = new SqlCommand(queryd, conn1);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            //cmd.Parameters.Add("@userDetailId", System.Data.SqlDbType.Int).Value = 0;
+            cmd.Parameters.Add("@rfid", System.Data.SqlDbType.Int).Value = 510;
+            cmd.Parameters.Add("@foodtype", System.Data.SqlDbType.VarChar).Value = "Non-vegthali";
+            cmd.Parameters.Add("@OPType", System.Data.SqlDbType.VarChar).Value = "u";
+
+            conn1.Open();
+            cmd.ExecuteNonQuery();
+            conn1.Close();
+
+
+        }
+    }
+}
+
